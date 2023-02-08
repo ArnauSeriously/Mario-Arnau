@@ -22,7 +22,8 @@ public class GroundSensor : MonoBehaviour
         else if (other.gameObject.layer == 6)
         {
             Debug.Log("goomba muerto");
-            Destroy(other.gameObject);
+            Enemy goomba=other.gameObject.GetComponent<Enemy>();
+            goomba.Die(); 
         }
 
         if(other.gameObject.tag == "DeadZone" )
