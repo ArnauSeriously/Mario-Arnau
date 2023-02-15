@@ -8,13 +8,18 @@ public float speed;
     Animator anim; 
     BoxCollider2D boxCollider;
     Rigidbody2D rBody;
+    SFXManager sfxManager;
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         boxCollider=GetComponent<BoxCollider2D>();
         rBody=GetComponent<Rigidbody2D>();
+        sfxManager= GameObject.Find("SFXManager").GetComponent<SFXManager>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -33,6 +38,8 @@ public float speed;
         {
             Debug.Log ("Mario muerto");
             Destroy(collision.gameObject);
+            soundManager.StopBGM();
+            sfxManager.MarioDeath();
         }
         if(collision.gameObject.tag =="ColisionGoomba")
         {
