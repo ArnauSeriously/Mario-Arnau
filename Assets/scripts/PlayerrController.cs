@@ -13,6 +13,8 @@ public class PlayerrController : MonoBehaviour
     private GroundSensor sensor;
     public Animator anim;
     float horizontal;
+    GAMEMANAGER GameManager;
+    SFXManager sfxManager; 
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,9 @@ public class PlayerrController : MonoBehaviour
         rBody = GetComponent<Rigidbody2D>();
         sensor = GameObject.Find("GroundSensor").GetComponent<GroundSensor>();
         anim = GetComponent<Animator>();
-
+        sfxManager= GameObject.Find("SFXManager").GetComponent<SFXManager>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GAMEMANAGER>();
         playerHealth = 10;
         Debug.Log(texto);
     }
@@ -29,7 +33,8 @@ public class PlayerrController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
+        if(GameManager.isGameOver == false)
+        { horizontal = Input.GetAxis("Horizontal");
 
         //transform.position += new Vector3(horizontal, 0, 0) * playerSpeed * Time.deltaTime;
 
@@ -46,16 +51,29 @@ public class PlayerrController : MonoBehaviour
         else
         {
             anim.SetBool("IsRunning", false);
+             GAMEMANAGER = GameObject.Find("GameManager").GetComponent<GAMEMANAGER>();
         }
 
         if(Input.GetButtonDown("Jump") && sensor.isGrounded)
         {
             rBody.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
             anim.SetBool("IsRunning", true);
-        }
+        }}
+       
     }
     private void FixedUpdate() 
     {
         rBody.velocity = new Vector2(horizontal * playerSpeed, rBody.velocity.y );
     }
+    void OnTriggerEnter2D (Collider2D collider) {
+
+        if(collider.gameObject.tag=="Coin")
+        {
+            GameManager.AddCoin();
+            Destroy(collider.gameObject); 
+        }
+    }
+       
+
+    
 }

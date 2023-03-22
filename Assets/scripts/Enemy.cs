@@ -10,6 +10,8 @@ public float speed;
     Rigidbody2D rBody;
     SFXManager sfxManager;
     SoundManager soundManager;
+
+    GAMEMANAGER GameManager; 
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public float speed;
         rBody=GetComponent<Rigidbody2D>();
         sfxManager= GameObject.Find("SFXManager").GetComponent<SFXManager>();
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GAMEMANAGER>();
     }
 
 
@@ -40,6 +43,7 @@ public float speed;
             Destroy(collision.gameObject);
             soundManager.StopBGM();
             sfxManager.MarioDeath();
+            GameManager.GameOver(); 
         }
         if(collision.gameObject.tag =="ColisionGoomba")
         {
