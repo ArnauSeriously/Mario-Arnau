@@ -71,4 +71,14 @@ void OnTriggerEnter2D (Collider2D collider)
                 horizontal=1;
             }
  }
+
+ void OnBecameVisible() 
+ {
+    GameManager.enemiesInScreen.Add(this.gameObject); 
+ }
+ void OnBecameInvisible()
+ {
+    GameManager.enemiesInScreen.Remove(this.gameObject); 
+ }
 }
+

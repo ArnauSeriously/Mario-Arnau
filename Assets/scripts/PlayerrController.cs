@@ -14,6 +14,7 @@ public class PlayerrController : MonoBehaviour
     public Animator anim;
     float horizontal;
     GAMEMANAGER GameManager;
+    SoundManager soundManager;
     SFXManager sfxManager; 
 
     // Start is called before the first frame update
@@ -51,7 +52,7 @@ public class PlayerrController : MonoBehaviour
         else
         {
             anim.SetBool("IsRunning", false);
-             GAMEMANAGER = GameObject.Find("GameManager").GetComponent<GAMEMANAGER>();
+             GameManager = GameObject.Find("GameManager").GetComponent<GAMEMANAGER>();
         }
 
         if(Input.GetButtonDown("Jump") && sensor.isGrounded)

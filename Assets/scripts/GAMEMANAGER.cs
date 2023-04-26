@@ -10,6 +10,10 @@ public class GAMEMANAGER : MonoBehaviour
     // Start is called before the first frame update
 
     public Text coinText; 
+
+    public int coins;
+
+    public List<GameObject> enemiesInScreen=new List<GameObject>(); 
     void Start()
     {
         
@@ -18,6 +22,10 @@ public class GAMEMANAGER : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            KillAllEnemies();
+        }
         
     }
     public void GameOver()
@@ -46,5 +54,13 @@ public class GAMEMANAGER : MonoBehaviour
 {
     coins++; 
     coinText.text = coins.ToString(); 
+}
+void KillAllEnemies()
+{
+    for (int i = 0; i< enemiesInScreen.Count; i++)
+    {
+ Destroy(enemiesInScreen[i]);
+
+    }
 }
 }

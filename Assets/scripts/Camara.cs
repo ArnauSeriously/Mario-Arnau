@@ -19,7 +19,7 @@ public class Camara : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Mario_0").GetComponent<Transform>();
-        GAMEMANAGER = GameObject.Find("GameManager").GetComponent<GAMEMANAGER>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GAMEMANAGER>();
     }
 
     // Update is called once per frame
